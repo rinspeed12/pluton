@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ООО «Плутон» — инженерные системы под ключ | Мытищи</title>
+<meta name="description" content="Вентиляция, электрика, охранная и пожарная сигнализация, видеонаблюдение под ключ. ООО «Плутон», г. Мытищи. Проект, монтаж, обслуживание.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --space-0:#070912;
+    --space-1:#0d1124;
+    --space-2:#141a35;
+    --line:rgba(150,160,210,.14);
+    --pluto-tan:#d9a273;
+    --pluto-rose:#c8846a;
+    --ice:#ece3d6;
+    --amber:#f2b134;
+    --amber-deep:#b97d10;
+    --frost:#6ea8e0;
+    --text:#eceaf4;
+    --muted:#98a0bd;
+    --r:16px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Manrope',system-ui,sans-serif;
+    background:var(--space-0);
+    color:var(--text);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* deep-space ambient background */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-2;
+    background:
+      radial-gradient(1100px 700px at 78% -5%, rgba(201,132,106,.16), transparent 60%),
+      radial-gradient(900px 900px at 15% 110%, rgba(110,168,224,.12), transparent 60%),
+      radial-gradient(circle at 50% 40%, #10152e 0%, #070912 70%);
+  }
+  body::after{ /* faint starfield */
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%,#fff,transparent),
+      radial-gradient(1px 1px at 80% 20%,#fff,transparent),
+      radial-gradient(1px 1px at 65% 65%,#dfe6ff,transparent),
+      radial-gradient(1px 1px at 35% 80%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 90% 55%,#fff,transparent),
+      radial-gradient(1px 1px at 10% 60%,#cfe0ff,transparent);
+    background-repeat:no-repeat;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:'Unbounded',sans-serif;line-height:1.05;letter-spacing:-.01em}
+  .eyebrow{
+    font-family:'Unbounded',sans-serif;font-weight:600;font-size:.72rem;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--pluto-tan);
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    backdrop-filter:blur(14px);
+    background:linear-gradient(180deg,rgba(8,10,20,.82),rgba(8,10,20,.42));
+    border-bottom:1px solid var(--line);
+  }
+  .hbar{display:flex;align-items:center;justify-content:space-between;height:70px;gap:16px}
+  .brand{display:flex;align-items:center;gap:12px;font-family:'Unbounded',sans-serif;font-weight:800;font-size:1.15rem}
+  .brand .dot{
+    width:30px;height:30px;border-radius:50%;flex:none;
+    background:radial-gradient(circle at 32% 30%,#f0d3b4,#c8846a 45%,#6e4028 100%);
+    box-shadow:0 0 18px rgba(217,162,115,.6), inset -3px -3px 8px rgba(0,0,0,.5);
+  }
+  .brand small{color:var(--muted);font-weight:400}
+  .hactions{display:flex;align-items:center;gap:14px}
+  .hphone{font-family:'Unbounded',sans-serif;font-weight:600;font-size:1.02rem;white-space:nowrap}
+  .hphone:hover{color:var(--amber)}
+  .max-link{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:9px 16px;border-radius:999px;font-weight:700;font-size:.9rem;white-space:nowrap;
+    color:#0b1020;background:linear-gradient(180deg,#8fd0ff,var(--frost));
+    box-shadow:0 3px 0 #2f6ba3, 0 8px 16px rgba(110,168,224,.35);
+    transition:transform .12s, box-shadow .12s;
+  }
+  .max-link:hover{transform:translateY(-1px);box-shadow:0 4px 0 #2f6ba3,0 10px 20px rgba(110,168,224,.45)}
+  .max-link:active{transform:translateY(3px);box-shadow:0 1px 0 #2f6ba3,0 4px 10px rgba(110,168,224,.4)}
+  .max-link svg{width:16px;height:16px}
+  .hphone-mini{display:none}
+
+  /* ---------- BUTTONS (3D) ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+    font-family:'Unbounded',sans-serif;font-weight:600;font-size:.98rem;
+    padding:16px 30px;border-radius:14px;border:none;cursor:pointer;
+    transition:transform .12s cubic-bezier(.3,1.4,.5,1), box-shadow .12s;
+    transform:translateY(0);
+  }
+  .btn-primary{
+    color:#241503;
+    background:linear-gradient(180deg,#ffd15c,var(--amber));
+    box-shadow:0 7px 0 var(--amber-deep), 0 16px 26px rgba(242,177,52,.32);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 9px 0 var(--amber-deep),0 22px 32px rgba(242,177,52,.4)}
+  .btn-primary:active{transform:translateY(5px);box-shadow:0 2px 0 var(--amber-deep),0 8px 14px rgba(242,177,52,.35)}
+  .btn-ghost{
+    color:var(--text);
+    background:linear-gradient(180deg,rgba(120,130,180,.16),rgba(120,130,180,.06));
+    box-shadow:0 6px 0 rgba(60,68,110,.55), 0 12px 22px rgba(0,0,0,.4);
+    border:1px solid var(--line);
+  }
+  .btn-ghost:hover{transform:translateY(-2px)}
+  .btn-ghost:active{transform:translateY(5px);box-shadow:0 1px 0 rgba(60,68,110,.55),0 6px 12px rgba(0,0,0,.4)}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding-top:70px;min-height:100svh;display:flex;align-items:center}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:center;width:100%;padding:60px 0}
+  .hero-copy{max-width:560px}
+  .hero h1{font-size:clamp(2.3rem,5.4vw,4rem);font-weight:800;margin:18px 0 20px}
+  .hero h1 em{font-style:normal;color:var(--pluto-tan)}
+  .hero p.lead{font-size:1.14rem;color:var(--muted);max-width:490px}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:16px;margin-top:32px}
+  .hero-stats{display:flex;gap:34px;margin-top:44px;flex-wrap:wrap}
+  .stat b{font-family:'Unbounded',sans-serif;font-weight:800;font-size:1.7rem;display:block;color:var(--ice)}
+  .stat span{font-size:.86rem;color:var(--muted)}
+
+  .planet-stage{position:relative;aspect-ratio:1/1;width:100%;max-width:520px;margin-left:auto}
+  #pluto-canvas{width:100%;height:100%;display:block}
+  /* CSS fallback planet (shown if WebGL fails) */
+  .planet-fallback{
+    position:absolute;inset:12%;border-radius:50%;display:none;
+    background:
+      radial-gradient(60px 50px at 62% 58%, rgba(236,227,214,.9), transparent 70%),
+      radial-gradient(circle at 34% 30%,#e8c9a6,#c8846a 42%,#7a4b33 78%,#3a2418 100%);
+    box-shadow:0 0 90px rgba(217,162,115,.4), inset -22px -18px 60px rgba(0,0,0,.7);
+    animation:spinfb 40s linear infinite;
+  }
+  @keyframes spinfb{to{filter:hue-rotate(6deg)}}
+  .no-webgl .planet-fallback{display:block}
+  .no-webgl #pluto-canvas{display:none}
+
+  /* ---------- SECTIONS ---------- */
+  section{position:relative}
+  .band{padding:96px 0}
+  .band-head{max-width:640px;margin-bottom:48px}
+  .band-head h2{font-size:clamp(1.8rem,3.6vw,2.7rem);font-weight:800;margin:14px 0}
+  .band-head p{color:var(--muted);font-size:1.06rem}
+
+  /* Services */
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{
+    position:relative;padding:30px 26px 28px;border-radius:20px;
+    background:linear-gradient(180deg,rgba(22,28,55,.9),rgba(13,17,36,.9));
+    border:1px solid var(--line);
+    box-shadow:0 18px 40px rgba(0,0,0,.45);
+    transform-style:preserve-3d;
+    transition:transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s, border-color .25s;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;inset:0;opacity:0;transition:opacity .25s;
+    background:radial-gradient(340px 200px at var(--mx,50%) var(--my,0%),rgba(242,177,52,.14),transparent 70%);
+  }
+  .card:hover{transform:translateY(-8px) rotateX(5deg) rotateY(-4deg);border-color:rgba(242,177,52,.4);box-shadow:0 30px 60px rgba(0,0,0,.6),0 0 40px rgba(242,177,52,.1)}
+  .card:hover::before{opacity:1}
+  .card .ico{
+    width:56px;height:56px;border-radius:14px;display:grid;place-items:center;margin-bottom:20px;
+    background:linear-gradient(160deg,rgba(217,162,115,.22),rgba(110,168,224,.12));
+    border:1px solid var(--line);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+  }
+  .card .ico svg{width:28px;height:28px;stroke:var(--pluto-tan);fill:none;stroke-width:1.7}
+  .card h3{font-size:1.18rem;font-weight:600;margin-bottom:10px}
+  .card p{color:var(--muted);font-size:.96rem}
+  .card .idx{
+    position:absolute;top:22px;right:24px;font-family:'Unbounded',sans-serif;
+    font-weight:800;font-size:.9rem;color:rgba(152,160,189,.35)
+  }
+
+  /* About / advantages */
+  .about{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .adv-list{display:grid;gap:18px}
+  .adv{display:flex;gap:16px;align-items:flex-start;padding:20px;border-radius:16px;background:rgba(20,26,53,.5);border:1px solid var(--line)}
+  .adv .mark{width:40px;height:40px;flex:none;border-radius:50%;display:grid;place-items:center;
+    background:radial-gradient(circle at 34% 30%,#ffd88a,var(--amber) 60%,var(--amber-deep));color:#241503;font-weight:800;font-family:'Unbounded',sans-serif}
+  .adv h4{font-family:'Unbounded',sans-serif;font-weight:600;font-size:1.04rem;margin-bottom:4px}
+  .adv p{color:var(--muted);font-size:.94rem}
+  .about-visual{
+    position:relative;aspect-ratio:4/5;border-radius:24px;overflow:hidden;
+    border:1px solid var(--line);
+    background:
+      radial-gradient(320px 320px at 70% 20%, rgba(217,162,115,.35), transparent 65%),
+      radial-gradient(circle at 30% 80%, rgba(110,168,224,.25), transparent 60%),
+      linear-gradient(160deg,#141a35,#0a0e1e);
+    display:grid;place-items:center;padding:40px;text-align:center;
+  }
+  .about-visual .big{font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(2rem,5vw,3.2rem);color:var(--ice)}
+  .about-visual .sub{color:var(--muted);margin-top:12px;max-width:280px}
+  .orbit-ring{position:absolute;inset:8%;border:1px dashed rgba(217,162,115,.3);border-radius:50%}
+  .orbit-ring.two{inset:20%;border-color:rgba(110,168,224,.25)}
+
+  /* Contacts */
+  .contacts{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;align-items:stretch}
+  .contact-card{background:linear-gradient(180deg,rgba(22,28,55,.9),rgba(13,17,36,.92));border:1px solid var(--line);border-radius:20px;padding:34px}
+  .cinfo{display:grid;gap:22px;margin:26px 0 30px}
+  .cinfo .row{display:flex;gap:14px;align-items:flex-start}
+  .cinfo .row svg{width:22px;height:22px;flex:none;stroke:var(--pluto-tan);fill:none;stroke-width:1.7;margin-top:2px}
+  .cinfo .row .lbl{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .cinfo .row .val{font-size:1.05rem;font-weight:600}
+  .cinfo .row .val a:hover{color:var(--amber)}
+  .contact-actions{display:flex;flex-wrap:wrap;gap:14px}
+  .map-shell{border:1px solid var(--line);border-radius:20px;overflow:hidden;min-height:440px;background:var(--space-2)}
+  .map-shell iframe{width:100%;height:100%;min-height:440px;border:0;display:block;filter:saturate(1.05)}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line);padding:44px 0;background:rgba(6,8,16,.7)}
+  .fgrid{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  .fbrand{display:flex;align-items:center;gap:12px;font-family:'Unbounded',sans-serif;font-weight:800}
+  .freq{color:var(--muted);font-size:.9rem;text-align:right;line-height:1.7}
+  .freq b{color:var(--text);font-weight:600}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:960px){
+    .hero-grid{grid-template-columns:1fr;gap:10px;padding:40px 0}
+    .planet-stage{order:-1;max-width:340px;margin:0 auto}
+    .hero-copy{max-width:none;text-align:center;margin:0 auto}
+    .hero p.lead{margin:0 auto}
+    .hero-cta,.hero-stats{justify-content:center}
+    .svc-grid{grid-template-columns:repeat(2,1fr)}
+    .about{grid-template-columns:1fr;gap:36px}
+    .about-visual{order:-1;aspect-ratio:16/10;max-width:520px}
+    .contacts{grid-template-columns:1fr}
+    .card:hover{transform:translateY(-6px)}
+  }
+  @media (max-width:640px){
+    .wrap{padding:0 18px}
+    .band{padding:70px 0}
+    .hphone{display:none}
+    .hphone-mini{display:inline-flex;padding:9px;border-radius:50%;background:rgba(242,177,52,.14);border:1px solid var(--line)}
+    .hphone-mini svg{width:18px;height:18px;stroke:var(--amber);fill:none;stroke-width:1.9}
+    .brand small{display:none}
+    .svc-grid{grid-template-columns:1fr}
+    .btn{width:100%}
+    .hero-stats{gap:24px}
+    .freq{text-align:left}
+    .fgrid{justify-content:flex-start}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms!important;scroll-behavior:auto!important}
+  }
+  :focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap hbar">
+    <a class="brand" href="#top" aria-label="ООО Плутон — на главную">
+      <span class="dot" aria-hidden="true"></span>
+      <span>Плутон<br><small>инженерные системы</small></span>
+    </a>
+    <div class="hactions">
+      <a class="hphone" href="tel:+79629110109">+7 (962) 911-01-09</a>
+      <a class="hphone-mini" href="tel:+79629110109" aria-label="Позвонить">
+        <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+      </a>
+      <!-- ЗАМЕНИТЕ href на реальную ссылку профиля компании в MAX -->
+      <a class="max-link" href="https://max.ru/" target="_blank" rel="noopener" aria-label="Написать в мессенджер MAX">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.4 8.7 8.7 0 0 1-3.9-.9L3 20.5l1.6-5.4a8.3 8.3 0 0 1-1-4A8.4 8.4 0 0 1 12.5 3 8.4 8.4 0 0 1 21 11.5z"/></svg>
+        MAX
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">ООО «Плутон» · г. Мытищи</span>
+      <h1>Инженерные системы, на&nbsp;которые можно <em>положиться</em></h1>
+      <p class="lead">Вентиляция, электрика и системы безопасности под ключ — от проекта и монтажа до сдачи объекта и сервисного обслуживания.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#contacts">Оставить заявку</a>
+        <a class="btn btn-ghost" href="#services">Наши услуги</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>5</b><span>направлений<br>под одной крышей</span></div>
+        <div class="stat"><b>Пн–Пт</b><span>с 9:00 до 18:00<br>на связи</span></div>
+        <div class="stat"><b>МО</b><span>Москва<br>и область</span></div>
+      </div>
+    </div>
+    <div class="planet-stage">
+      <canvas id="pluto-canvas" aria-label="3D-модель планеты Плутон" role="img"></canvas>
+      <div class="planet-fallback" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="band" id="services">
+  <div class="wrap">
+    <div class="band-head">
+      <span class="eyebrow">Услуги</span>
+      <h2>Пять систем на одной орбите</h2>
+      <p>Проектируем и монтируем инженерные системы комплексно, поэтому они работают как единое целое, а не набор разрозненных решений.</p>
+    </div>
+    <div class="svc-grid" id="svcGrid">
+      <article class="card">
+        <span class="idx">01</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0 0-8"/><path d="M12 12a4 4 0 1 1 0 8"/><path d="M12 12H4"/><path d="M12 12h8"/></svg></div>
+        <h3>Вентиляция</h3>
+        <p>Приточно-вытяжные системы, кондиционирование и климат-контроль для комфортного и здорового микроклимата.</p>
+      </article>
+      <article class="card">
+        <span class="idx">02</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+        <h3>Электрика</h3>
+        <p>Электромонтаж, щитовое оборудование и освещение — по проекту и в соответствии с нормами ПУЭ.</p>
+      </article>
+      <article class="card">
+        <span class="idx">03</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3z"/></svg></div>
+        <h3>Охранная сигнализация</h3>
+        <p>Защита периметра и помещений с выводом сигнала на пульт и мгновенными уведомлениями о тревоге.</p>
+      </article>
+      <article class="card">
+        <span class="idx">04</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 22c4-2 6-5 6-9 0-3-2-5-2-5s-1 2-3 2c0-3-3-8-3-8S6 8 6 12c0 4 2 8 6 10z"/></svg></div>
+        <h3>Пожарная сигнализация</h3>
+        <p>Раннее обнаружение возгорания, оповещение и автоматика — по действующим нормам пожарной безопасности.</p>
+      </article>
+      <article class="card">
+        <span class="idx">05</span>
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M2 7h13v10H2z"/><path d="M15 10l7-3v10l-7-3"/></svg></div>
+        <h3>Видеонаблюдение</h3>
+        <p>IP-камеры, надёжный архив и удалённый просмотр объекта с телефона в любое время суток.</p>
+      </article>
+      <article class="card" style="display:grid;place-items:center;text-align:center;background:linear-gradient(160deg,rgba(242,177,52,.14),rgba(110,168,224,.08))">
+        <div>
+          <h3 style="margin-bottom:12px">Нужен комплекс?</h3>
+          <p style="margin-bottom:20px">Соберём проект под ваш объект и рассчитаем стоимость.</p>
+          <a class="btn btn-primary" href="#contacts" style="padding:13px 24px;font-size:.9rem">Обсудить проект</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="band" id="about">
+  <div class="wrap about">
+    <div class="about-visual">
+      <div class="orbit-ring" aria-hidden="true"></div>
+      <div class="orbit-ring two" aria-hidden="true"></div>
+      <div>
+        <div class="big">Полный цикл</div>
+        <div class="sub">от идеи и проекта до сдачи объекта и дальнейшего обслуживания</div>
+      </div>
+    </div>
+    <div>
+      <span class="eyebrow">О компании</span>
+      <h2 style="font-size:clamp(1.8rem,3.6vw,2.6rem);font-weight:800;margin:14px 0 24px">Почему выбирают «Плутон»</h2>
+      <div class="adv-list">
+        <div class="adv"><span class="mark">1</span><div><h4>Все системы у одного подрядчика</h4><p>Не нужно согласовывать пять бригад — вентиляция, электрика и безопасность выполняются согласованно.</p></div></div>
+        <div class="adv"><span class="mark">2</span><div><h4>Свой монтаж и контроль качества</h4><p>Работы ведут наши специалисты, а не случайные субподрядчики. Отвечаем за результат.</p></div></div>
+        <div class="adv"><span class="mark">3</span><div><h4>Гарантия и сервис</h4><p>Обслуживаем установленные системы и оперативно выезжаем на объект при необходимости.</p></div></div>
+        <div class="adv"><span class="mark">4</span><div><h4>Москва и область</h4><p>Работаем в Мытищах и по всему региону — от небольших офисов до крупных объектов.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTS + MAP ============ -->
+<section class="band" id="contacts">
+  <div class="wrap">
+    <div class="band-head">
+      <span class="eyebrow">Контакты</span>
+      <h2>Свяжитесь с нами</h2>
+      <p>Позвоните, напишите на почту или в мессенджер MAX — ответим в рабочие часы и подскажем по вашему объекту.</p>
+    </div>
+    <div class="contacts">
+      <div class="contact-card">
+        <div class="fbrand" style="font-size:1.15rem"><span class="dot" style="width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 32% 30%,#f0d3b4,#c8846a 45%,#6e4028 100%);box-shadow:0 0 14px rgba(217,162,115,.6)"></span>ООО «Плутон»</div>
+        <div class="cinfo">
+          <div class="row">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div><div class="lbl">Адрес</div><div class="val">141018, Московская область,<br>г. Мытищи, ул. Терешковой, д. 1А, комн. 317</div></div>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+            <div><div class="lbl">Телефон</div><div class="val"><a href="tel:+79629110109">+7 (962) 911-01-09</a></div></div>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7 10-7"/></svg>
+            <div><div class="lbl">E-mail</div><div class="val"><a href="mailto:info@ooopluton.ru">info@ooopluton.ru</a></div></div>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <div><div class="lbl">Часы работы</div><div class="val">Пн – Пт, с 9:00 до 18:00</div></div>
+          </div>
+        </div>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="tel:+79629110109" style="padding:14px 24px;font-size:.92rem">Позвонить</a>
+          <!-- ЗАМЕНИТЕ href на реальную ссылку компании в MAX -->
+          <a class="btn btn-ghost" href="https://max.ru/" target="_blank" rel="noopener" style="padding:14px 24px;font-size:.92rem">Написать в MAX</a>
+        </div>
+      </div>
+      <div class="map-shell">
+        <!-- Метка ставится по адресу автопоиском Яндекс.Карт. Для точного пина/схемы проезда
+             можно собрать карту в конструкторе: yandex.ru/map-constructor и вставить его iframe сюда. -->
+        <iframe
+          title="ООО Плутон на Яндекс Картах — схема проезда"
+          src="https://yandex.ru/map-widget/v1/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C%2C%20%D0%9C%D1%8B%D1%82%D0%B8%D1%89%D0%B8%2C%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%A2%D0%B5%D1%80%D0%B5%D1%88%D0%BA%D0%BE%D0%B2%D0%BE%D0%B9%2C%201%D0%90&z=17"
+          loading="lazy"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap fgrid">
+    <div>
+      <div class="fbrand"><span class="dot" style="width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 32% 30%,#f0d3b4,#c8846a 45%,#6e4028 100%)"></span>ООО «Плутон»</div>
+      <p style="color:var(--muted);font-size:.86rem;margin-top:8px;max-width:340px">Инженерные системы под ключ: вентиляция, электрика, охранная и пожарная сигнализация, видеонаблюдение.</p>
+    </div>
+    <div class="freq">
+      <b>ИНН 5029251292</b><br>
+      141018, МО, г. Мытищи, ул. Терешковой, д. 1А, комн. 317<br>
+      © 2026 ООО «Плутон». Все права защищены.
+    </div>
+  </div>
+</footer>
+
+<!-- Three.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var stage = document.querySelector('.planet-stage');
+  var canvas = document.getElementById('pluto-canvas');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function fallback(){ document.body.classList.add('no-webgl'); }
+
+  if(!window.THREE){ fallback(); return; }
+
+  // ---- procedural Pluto texture (reddish terrain + pale "heart" of Sputnik Planitia) ----
+  function plutoTexture(){
+    var c = document.createElement('canvas');
+    c.width = 1024; c.height = 512;
+    var x = c.getContext('2d');
+    var g = x.createLinearGradient(0,0,0,512);
+    g.addColorStop(0,'#7a4b33'); g.addColorStop(.5,'#b57a4f'); g.addColorStop(1,'#6b3e26');
+    x.fillStyle = g; x.fillRect(0,0,1024,512);
+    // terrain speckle
+    for(var i=0;i<1100;i++){
+      var r = Math.random()*36+5, px=Math.random()*1024, py=Math.random()*512;
+      var dark = Math.random()<.5;
+      x.fillStyle = (dark?'rgba(88,52,32,':'rgba(206,158,116,') + (Math.random()*.18+.04) + ')';
+      x.beginPath(); x.arc(px,py,r,0,Math.PI*2); x.fill();
+    }
+    // dark macula band
+    x.save(); x.globalAlpha=.5; x.fillStyle='#3a2418';
+    x.beginPath(); x.ellipse(300,300,270,72,0,0,Math.PI*2); x.fill(); x.restore();
+    // pale heart (Tombaugh Regio)
+    (function(cx,cy,size){
+      x.save(); x.translate(cx,cy);
+      x.shadowColor='#efe6d6'; x.shadowBlur=45; x.fillStyle='#e9dfce';
+      var s=size/100;
+      x.beginPath();
+      x.moveTo(0,32*s);
+      x.bezierCurveTo(-58*s,-22*s,-32*s,-64*s,0,-26*s);
+      x.bezierCurveTo(32*s,-64*s,58*s,-22*s,0,32*s);
+      x.fill(); x.globalAlpha=.55; x.fill();
+      x.restore();
+    })(690,300,155);
+    var t = new THREE.CanvasTexture(c);
+    t.anisotropy = 4;
+    return t;
+  }
+
+  var renderer;
+  try{
+    renderer = new THREE.WebGLRenderer({canvas:canvas, alpha:true, antialias:true});
+  }catch(e){ fallback(); return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
+
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+  camera.position.z = 3.2;
+
+  var tex = plutoTexture();
+  var pluto = new THREE.Mesh(
+    new THREE.SphereGeometry(1, 72, 72),
+    new THREE.MeshStandardMaterial({ map:tex, bumpMap:tex, bumpScale:0.02, roughness:1, metalness:0 })
+  );
+  pluto.rotation.z = 0.16;
+  scene.add(pluto);
+
+  // atmospheric fresnel glow (backside)
+  var glow = new THREE.Mesh(
+    new THREE.SphereGeometry(1.18, 72, 72),
+    new THREE.ShaderMaterial({
+      transparent:true, side:THREE.BackSide, depthWrite:false, blending:THREE.AdditiveBlending,
+      uniforms:{ c:{value:new THREE.Color(0xd9a273)} },
+      vertexShader:'varying vec3 vN;varying vec3 vP;void main(){vN=normalize(normalMatrix*normal);vec4 mv=modelViewMatrix*vec4(position,1.0);vP=mv.xyz;gl_Position=projectionMatrix*mv;}',
+      fragmentShader:'varying vec3 vN;varying vec3 vP;uniform vec3 c;void main(){vec3 v=normalize(-vP);float f=pow(1.0-abs(dot(vN,v)),2.6);gl_FragColor=vec4(c,f*0.9);}'
+    })
+  );
+  scene.add(glow);
+
+  // lights
+  scene.add(new THREE.AmbientLight(0x2a3050, 1.15));
+  var sun = new THREE.DirectionalLight(0xfff0e0, 2.3); sun.position.set(-3, 1.4, 2.2); scene.add(sun);
+  var rim = new THREE.DirectionalLight(0x6ea8e0, 0.7); rim.position.set(3, -1, -2); scene.add(rim);
+
+  // local stars for depth
+  var sg = new THREE.BufferGeometry(), pos=[];
+  for(var k=0;k<420;k++){
+    var rr=9+Math.random()*22, th=Math.random()*Math.PI*2, ph=Math.acos(2*Math.random()-1);
+    pos.push(rr*Math.sin(ph)*Math.cos(th), rr*Math.sin(ph)*Math.sin(th), rr*Math.cos(ph));
+  }
+  sg.setAttribute('position', new THREE.Float32BufferAttribute(pos,3));
+  var stars = new THREE.Points(sg, new THREE.PointsMaterial({color:0xffffff,size:0.05,transparent:true,opacity:.85}));
+  scene.add(stars);
+
+  // resize to container
+  function resize(){
+    var w = stage.clientWidth, h = stage.clientHeight;
+    if(!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w/h; camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // mouse / touch parallax
+  var tx=0, ty=0, cx=0, cy=0;
+  stage.addEventListener('pointermove', function(e){
+    var b = stage.getBoundingClientRect();
+    tx = ((e.clientX-b.left)/b.width - .5) * 0.5;
+    ty = ((e.clientY-b.top)/b.height - .5) * 0.4;
+  });
+  stage.addEventListener('pointerleave', function(){ tx=0; ty=0; });
+
+  var running = true;
+  document.addEventListener('visibilitychange', function(){ running = !document.hidden; });
+
+  function frame(){
+    requestAnimationFrame(frame);
+    if(!running) return;
+    if(!reduce) pluto.rotation.y += 0.0016;
+    stars.rotation.y += 0.0003;
+    cx += (tx - cx)*0.05; cy += (ty - cy)*0.05;
+    camera.position.x = cx*1.4;
+    camera.position.y = -cy*1.2;
+    camera.lookAt(0,0,0);
+    renderer.render(scene, camera);
+  }
+  frame();
+})();
+
+// card glow follows cursor + subtle tilt origin
+document.querySelectorAll('#svcGrid .card').forEach(function(card){
+  card.addEventListener('pointermove', function(e){
+    var b = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX-b.left)/b.width*100)+'%');
+    card.style.setProperty('--my', ((e.clientY-b.top)/b.height*100)+'%');
+  });
+});
+</script>
+</body>
+</html>
