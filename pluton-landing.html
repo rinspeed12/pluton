@@ -123,7 +123,58 @@
 
   /* ---------- HERO ---------- */
   .hero{position:relative;padding-top:70px;display:flex;align-items:flex-start}
-  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:center;width:100%;padding:64px 0 40px}
+  /* dense hero starfield reaching from the planet toward the left text */
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      radial-gradient(1px 1px at 50% 8%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 53% 22%,#dfe6ff,transparent),
+      radial-gradient(1px 1px at 49% 38%,#fff,transparent),
+      radial-gradient(1px 1px at 55% 52%,#cfe0ff,transparent),
+      radial-gradient(1.5px 1.5px at 51% 68%,#fff,transparent),
+      radial-gradient(1px 1px at 48% 82%,#dfe6ff,transparent),
+      radial-gradient(1px 1px at 58% 14%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 62% 30%,#fff,transparent),
+      radial-gradient(1px 1px at 60% 46%,#cfe0ff,transparent),
+      radial-gradient(1px 1px at 64% 62%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 58% 78%,#dfe6ff,transparent),
+      radial-gradient(1px 1px at 66% 18%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 70% 34%,#fff,transparent),
+      radial-gradient(1px 1px at 68% 50%,#cfe0ff,transparent),
+      radial-gradient(1px 1px at 72% 66%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 66% 82%,#dfe6ff,transparent),
+      radial-gradient(1px 1px at 74% 10%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 78% 26%,#fff,transparent),
+      radial-gradient(1px 1px at 76% 42%,#cfe0ff,transparent),
+      radial-gradient(1px 1px at 80% 58%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 74% 74%,#dfe6ff,transparent),
+      radial-gradient(1px 1px at 82% 16%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 86% 32%,#fff,transparent),
+      radial-gradient(1px 1px at 84% 48%,#cfe0ff,transparent),
+      radial-gradient(1px 1px at 88% 64%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 82% 80%,#dfe6ff,transparent),
+      radial-gradient(1px 1px at 90% 12%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 94% 28%,#fff,transparent),
+      radial-gradient(1px 1px at 92% 44%,#cfe0ff,transparent),
+      radial-gradient(1px 1px at 96% 60%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 90% 76%,#dfe6ff,transparent),
+      radial-gradient(1px 1px at 52% 50%,#fff,transparent),
+      radial-gradient(1px 1px at 56% 88%,#dfe6ff,transparent),
+      radial-gradient(1.5px 1.5px at 63% 6%,#fff,transparent),
+      radial-gradient(1px 1px at 71% 90%,#cfe0ff,transparent),
+      radial-gradient(1px 1px at 79% 4%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 87% 92%,#dfe6ff,transparent),
+      radial-gradient(1px 1px at 95% 88%,#fff,transparent),
+      radial-gradient(1px 1px at 47% 55%,#cfe0ff,transparent),
+      radial-gradient(1.5px 1.5px at 54% 40%,#fff,transparent),
+      radial-gradient(1px 1px at 61% 74%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 69% 22%,#dfe6ff,transparent),
+      radial-gradient(1px 1px at 77% 60%,#fff,transparent),
+      radial-gradient(1.5px 1.5px at 85% 70%,#fff,transparent),
+      radial-gradient(1px 1px at 93% 52%,#cfe0ff,transparent);
+    background-repeat:no-repeat;
+  }
+  .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:center;width:100%;padding:64px 0 40px}
   .hero-copy{max-width:560px}
   .hero h1{font-size:clamp(2.3rem,5.4vw,4rem);font-weight:800;margin:18px 0 20px}
   .hero h1 em{font-style:normal;color:var(--pluto-tan)}
