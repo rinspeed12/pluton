@@ -78,6 +78,11 @@
   }
   .brand small{color:var(--muted);font-weight:400}
   .hactions{display:flex;align-items:center;gap:14px}
+  .hnav{display:flex;align-items:center;gap:28px;margin-left:auto;margin-right:32px}
+  .hnav a{font-size:.95rem;font-weight:500;color:var(--muted);position:relative;transition:color .2s}
+  .hnav a:hover{color:var(--text)}
+  .hnav a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:2px;background:var(--amber);transition:width .25s}
+  .hnav a:hover::after{width:100%}
   .hphone{font-family:'Unbounded',sans-serif;font-weight:600;font-size:1.02rem;white-space:nowrap}
   .hphone:hover{color:var(--amber)}
   .max-link{
@@ -234,6 +239,7 @@
     .about{grid-template-columns:1fr;gap:36px}
     .about-visual{order:-1;aspect-ratio:16/10;max-width:520px}
     .contacts{grid-template-columns:1fr}
+    .hnav{display:none}
     .card:hover{transform:translateY(-6px)}
   }
   @media (max-width:640px){
@@ -264,6 +270,11 @@
       <span class="dot" aria-hidden="true"></span>
       <span>Плутон<br><small>инженерные системы</small></span>
     </a>
+    <nav class="hnav" aria-label="Основные разделы">
+      <a href="#services">Услуги</a>
+      <a href="#about">О компании</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
     <div class="hactions">
       <a class="hphone" href="tel:+79629110109">+7 (962) 911-01-09</a>
       <a class="hphone-mini" href="tel:+79629110109" aria-label="Позвонить">
