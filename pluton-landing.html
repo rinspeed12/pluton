@@ -345,6 +345,34 @@
     *{animation-duration:.001ms!important;scroll-behavior:auto!important}
   }
   :focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:6px}
+
+  /* ---------- CUSTOM SCROLLBAR (фирменные цвета) ---------- */
+  /* Firefox */
+  html{
+    scrollbar-width:thin;
+    scrollbar-color:var(--pluto-tan) var(--space-1);
+  }
+  /* WebKit / Blink (Chrome, Edge, Safari) */
+  ::-webkit-scrollbar{width:12px;height:12px}
+  ::-webkit-scrollbar-track{
+    background:linear-gradient(180deg,var(--space-1),var(--space-0));
+    border-left:1px solid var(--line);
+  }
+  ::-webkit-scrollbar-thumb{
+    border-radius:999px;
+    border:3px solid transparent;
+    background-clip:padding-box;
+    background:linear-gradient(180deg,var(--pluto-tan),var(--amber));
+    box-shadow:inset 0 0 6px rgba(0,0,0,.25), 0 0 10px rgba(217,162,115,.35);
+  }
+  ::-webkit-scrollbar-thumb:hover{
+    background:linear-gradient(180deg,var(--amber),var(--pluto-rose));
+    box-shadow:inset 0 0 6px rgba(0,0,0,.25), 0 0 14px rgba(242,177,52,.5);
+  }
+  ::-webkit-scrollbar-thumb:active{
+    background:linear-gradient(180deg,var(--amber-deep),var(--pluto-rose));
+  }
+  ::-webkit-scrollbar-corner{background:var(--space-0)}
 </style>
 
 <!-- Schema.org JSON-LD: локальный бизнес + услуги -->
